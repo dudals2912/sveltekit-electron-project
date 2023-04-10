@@ -1,0 +1,68 @@
+{
+  "name": "memento-sveltekit-electron-typescript",
+  "productName": "memento-sveltekit-electron-typescript",
+  "description": "Memento: how to use Svelte with Electron and TypeScript",
+  "author": "Samuele de Tomasi <samuele@stranianelli.com>",
+  "license": "MIT",
+  "version": "0.2.4",
+  "main": "dist/index.js",
+  "scripts": {
+    "nodemon": "nodemon",
+    "start": "npm run compile && electron .",
+    "svelte:dev": "cd svelte && npm run dev",
+    "svelte:build": "cd svelte && npm run build",
+    "compile": "tsc",
+    "out:win": "npm run svelte:build && npm run compile && electron-builder build --win --publish never",
+    "publish:win": "npm run svelte:build && npm run compile && electron-builder build --win --publish always",
+    "check-updates": "npx npm-check-updates",
+    "check-updates:minor": "npx npm-check-updates --target minor",
+    "check-updates:patch": "npx npm-check-updates --target patch"
+  },
+  "devDependencies": {
+    "@types/ffi-napi": "^4.0.7",
+    "@types/node": "^18.11.19",
+    "@types/ref-napi": "^3.0.6",
+    "concurrently": "^7.6.0",
+    "electron": "^19.0.0",
+    "electron-builder": "^23.6.0",
+    "ffi-napi": "^4.0.3",
+    "nodemon": "^2.0.20",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@el3um4s/ipc-for-electron": "^1.0.7",
+    "@el3um4s/ipc-for-electron-system-info": "^2.0.4",
+    "@types/lodash": "^4.14.191",
+    "electron-node-ffi": "^4.0.5",
+    "electron-reload": "^1.5.0",
+    "electron-serve": "^1.1.0",
+    "electron-updater": "^5.3.0"
+  },
+  "build": {
+    "appId": "memento-ket",
+    "directories": {
+      "output": "out"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "el3um4s",
+        "repo": "memento-sveltekit-electron-typescript"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "uninstallDisplayName": "Memento KET (SvelteKit+Electron+TypeScript)",
+      "license": "license.txt",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
